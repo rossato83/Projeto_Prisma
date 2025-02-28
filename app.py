@@ -1,21 +1,16 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 
-app = Flask(__name__)  # Certifique-se de que esta linha está presente
+app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Site publicado com sucesso no Render! 🚀"
+    return render_template("index.html")  # Agora carrega a página correta
 
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
-
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Render define a porta automaticamente
     app.run(host="0.0.0.0", port=port, debug=False)
 
 from flask import Flask, render_template, request, redirect
