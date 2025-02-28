@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Treinamentos</title>
+</head>
+<body>
+    <h1>Controle de Treinamentos</h1>
+
+    <h2>Adicionar Treinamento</h2>
+    <form action="/add_treinamento" method="post">
+        Nome: <input type="text" name="nome" required>
+        Descrição: <input type="text" name="descricao" required>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Adicionar Funcionário</h2>
+    <form action="/add_funcionario" method="post">
+        Nome: <input type="text" name="nome" required>
+        Treinamento:
+        <select name="treinamento_id">
+            {% for treinamento in treinamentos %}
+            <option value="{{ treinamento.id }}">{{ treinamento.nome }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Lista de Treinamentos</h2>
+    <ul>
+        {% for treinamento in treinamentos %}
+        <li>{{ treinamento.nome }} - {{ treinamento.descricao }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Funcionários e Treinamentos</h2>
+    <ul>
+        {% for funcionario in funcionarios %}
+        <li>{{ funcionario.nome }} - {{ funcionario.treinamento_id }} - {{ funcionario.status }}
+            {% if funcionario.status == "Pendente" %}
+            <a href="/update_status/{{ funcionario.id }}">Marcar como Concluído</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+<h2>Relatórios</h2>
+<a href="/export" class="btn btn-info">📥 Exportar para Excel</a>
+</body>
+</html>
