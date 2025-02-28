@@ -1,9 +1,22 @@
 import os
 
+from flask import Flask
+
+app = Flask(__name__)  # Certifique-se de que esta linha está presente
+
+@app.route("/")
+def home():
+    return "Site publicado com sucesso no Render! 🚀"
+
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Render define a porta automaticamente
     app.run(host="0.0.0.0", port=port, debug=False)
-
 
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
